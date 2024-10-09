@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Register Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background: black; 
+    }
+
+    .login-form {
+      position: relative;
+      width: 370px;
+      padding: 40px 35px 60px;
+      box-sizing: border-box;
+      border: 1px solid #018fa6;
+      border-radius: 5px;
+      box-shadow: inset 0 0 10px #018fa6;
+      background: #151515;
+    }
+
+    .text {
+      font-size: 30px;
+      color: #e5e900;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    form {
+      margin-top: 40px;
+    }
+
+    form .field {
+      margin-top: 20px;
+      display: flex;
+    }
+
+    .field .fas {
+      height: 50px;
+      width: 60px;
+      color: #018fa6;
+      font-size: 20px;
+      line-height: 50px;
+      border: 1px solid #444;
+      border-right: none;
+      border-radius: 5px 0 0 5px;
+      background: linear-gradient(#333, #222);
+    }
+
+    .field input,
+    form button {
+      height: 50px;
+      width: 100%;
+      outline: none;
+      font-size: 19px;
+      color: #e5e900;
+      padding: 0 15px;
+      border-radius: 0 5px 5px 0;
+      border: 1px solid #444;
+      background: linear-gradient(#333, #222);
+    }
+
+    input:focus {
+      color: #018fa6;
+      box-shadow: 0 0 5px rgba(0, 255, 255, .2), inset 0 0 5px rgba(0, 255, 255, .1);
+      background: linear-gradient(#333, #018fa6);
+      animation: glow .8s ease-out infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        border-color: #018fa6;
+        box-shadow: 0 0 5px rgba(0, 255, 255, .2), inset 0 0 5px rgba(0, 255, 255, .1);
+      }
+
+      100% {
+        border-color: #6ff;
+        box-shadow: 0 0 20px rgba(0, 255, 255, .6), inset 0 0 10px rgba(0, 255, 255, .4);
+      }
+    }
+
+    button {
+      margin-top: 30px;
+      background: #018fa6;
+      color: #e5e900;
+      border-radius: 5px!important;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background .3s, box-shadow .3s;
+    }
+
+    button:hover {
+      color: #e5e900;
+      background: black;
+      border: 1px solid #e5e900;
+      box-shadow: 0 0 5px rgba(0, 255, 255, .3), 0 0 10px rgba(0, 255, 255, .2), 0 0 15px rgba(0, 255, 255, .1), 0 2px 0 black;
+    }
+
+    .link {
+      margin-top: 25px;
+      color: red;
+    }
+
+    .link a {
+      color: #018fa6;
+      text-decoration: none;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+
+    #bg-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <script>
+    function validatePasswords() {
+      var password = document.getElementById("password").value;
+      var rePassword = document.getElementById("rePassword").value;
+      if (password !== rePassword) {
+        alert("Passwords do not match. Please re-enter.");
+        return false;
+      }
+      alert("Registered Successfully");
+      return true;
+    }
+  </script>
+
+</head>
+
+<body>
+  <div id="bg-wrap">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+      <!-- Background animation remains the same -->
+    </svg>
+  </div>
+
+  <div class="login-form">
+    <div class="text">REGISTER</div>
+    <form method="post" th:action="@{/save}">
+      <div class="field">
+        <div class="fas fa-user"></div>
+        <input type="text" placeholder="Full Name" name="name" required>
+      </div>
+      <div class="field">
+        <div class="fas fa-envelope"></div>
+        <input type="text" pattern=".{4}|.{10}" title="ID must be 4 or 10 characters" placeholder="Registered ID Number" name="id" required>
+      </div>
+      <div class="field">
+        <div class="fas fa-lock"></div>
+        <input type="password" placeholder="Password" id="password" name="password" required>
+      </div>
+      <div class="field">
+        <div class="fas fa-lock"></div>
+        <input type="password" placeholder="Confirm Password" id="rePassword" name="rePassword" required>
+      </div>
+      <button type="submit" onclick="return validatePasswords()">REGISTER</button>
+      <div class="link">Already a member? <a href="/login">Login now</a></div>
+    </form>
+  </div>
+</body>
+
+</html>
